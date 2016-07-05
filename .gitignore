@@ -1,0 +1,12 @@
+# py
+*.pyc
+*~
+
+.DS_Store
+
+# dev
+/venv
+/.env
+
+# pycharm
+.idea

@@ -1,0 +1,5 @@
+# static authentication
+flake8
+flake8-immediate
+flake8-single-quotes
+pep8-naming
