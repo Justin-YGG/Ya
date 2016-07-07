@@ -1,4 +1,4 @@
-## Ya is an applicatin recommending articles to you every day
+## Ya is an application recommending articles to you every day
 
 ### install back-end global dependency
 

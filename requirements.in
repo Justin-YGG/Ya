@@ -1,5 +1,10 @@
 flask>=0.10,<0.11
+flask-login
+flask_session
+flask-cache
 flask-limiter>=0.8,<0.9
+flask-sqlalchemy>=2.0,<2.1
+flask-migrate>=1.8, <1.9
 flask-mako>=0.3,<0.4
 flask-oauthlib>=0.9,<0.10
 flask-script>=2.0,<2.1
@@ -7,8 +12,14 @@ flask-wtf>=0.11,<0.12
 flask-seasurf>=0.2,<0.3
 blinker
 
+SQLAlchemy>=1.0.12,<1.1
+SQLAlchemy-Enum34==1.0.1
+SQLAlchemy-Utils==0.31.5
+
 arrow>=0.5,<0.6
 python-envcfg>=0.1,<0.2
+pymysql>=0.6,<0.7
+redis>=2.10,<2.11
 
 more-itertools>=2.2,<2.3
 requests>=2.8,<2.9

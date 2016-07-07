@@ -2,11 +2,11 @@
 
 from flask_script import Manager
 
-from sky.wsgi import app
+from sky.app import create_app
+from sky.extensions import db
 
-
+app = create_app()
 manager = Manager(app)
-
 
 @manager.command
 def runserver(host=None, port=None, workers=None):
@@ -21,7 +21,6 @@ def runserver(host=None, port=None, workers=None):
 
 def main():
     manager.run()
-
 
 if __name__ == '__main__':
     main()
