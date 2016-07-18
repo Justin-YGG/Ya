@@ -13,40 +13,50 @@ class Card(db.Model):
 
     __tablename__ = 'card'
 
-    class Status(Enum):
-        validate = 'V'
-        invalidate = 'I'
+    class Category(Enum):
+        selected = 'S'
+        common = 'C'
 
     id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.String(80), nullable=False)
     title = db.Column(db.String(80), nullable=False)
     content = db.Column(db.Text, nullable=False)
-    status = db.Column(db.CHAR(1), nullable=False)
+    category = db.Column(db.CHAR(1), nullable=False)
     pic_link = db.Column(db.String(80), nullable=False)
     like_amount = db.Column(db.Integer, nullable=False)
+    tag_id = db.Column(db.Integer, nullable=False)
     creation_time = db.Column(db.DateTime, nullable=False)
     update_time = db.Column(db.DateTime, nullable=False)
 
-    def __init__(self, title, content, status, pic_link,
-                 creation_time, update_time, like_amount=0):
+    def __init__(self, author_id, title, content, category, pic_link,
+                 tag_id, creation_time, update_time, like_amount=0):
+        self.author_id = str(author_id)
         self.title = title
         self.content = content
-        self._status = status
+        self._category = category
         self.pic_link = pic_link
+        self.tag_id = str(tag_id)
+        self.like_amount = like_amount
         self.creation_time = creation_time
         self.update_time = update_time
 
     @property
-    def status(self):
-        return self.Status(self._status)
+    def category(self):
+        return self.Category(self._category)
+
+    @category.setter
+    def category(self, new_category):
+        self.category = new_category
+        db.session.commit()
 
     @classmethod
-    def create(cls, title, content, status,
-               pic_link, like_amount=0):
-        assert isinstance(status, cls.Status)
+    def create(cls, author_id, title, content, pic_link, tag_id, 
+               like_amount=0, category=cls.Category.common):
+        assert isinstance(category, cls.Category)
 
         instance = cls(
-            title, content, status.value, pic_link,
-            datetime.now(), datetime.now())
+            author_id, title, content, category.value, pic_link,
+            tag_id, datetime.now(), datetime.now())
         db.session.add(instance)
 
         db.session.commit()
